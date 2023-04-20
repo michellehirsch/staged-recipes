@@ -1,0 +1,43 @@
+{% set name = "dnd-roller" %}
+{% set version = "0.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/michellehirsch/dnd-roller/archive/v{{ version }}.tar.gz
+  sha256: e87a6ed0bb406419919923cd5788ea93d4d70305e009fb12d701d0872273a7b9
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python >=3.10
+    - setuptools
+    - setuptools-scm
+    - pip
+  run:
+    - python >=3.10
+    - nomoji ==0.0.5
+    - tabulate
+
+test:
+  imports:
+    - dnd_roller
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: http://github.com/michellehirsch/dnd-roller
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - michellehirsch
